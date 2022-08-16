@@ -1,0 +1,27 @@
+import React from "react";
+
+
+function Navbar() {
+
+    return (
+        <nav className='nav'>
+            <div>
+                <a href='#s'>Profile</a>
+            </div>
+            <div>
+                <a>Message</a>
+            </div>
+            <div>
+                <a>News</a>
+            </div>
+            <div>
+                <a>Music</a>
+            </div>
+            <div>
+                <a>Settings</a>
+            </div>
+        </nav>
+    );
+}
+
+export default Navbar
