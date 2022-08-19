@@ -1,0 +1,17 @@
+.header {
+    grid-area: h;
+    background-color: #800080;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    color: white;
+    margin: 0 25px;
+}
+
+.header img {
+    width: 20px;
+    margin: 0 20px;
+}

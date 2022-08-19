@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
 .app-wrapper {
   width: 1200px;
   margin: 0 auto;
@@ -7,26 +9,12 @@
   "h h"
 "n c";
 
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 70px 1fr;
   grid-template-columns: 2fr 10fr;
   /*grid-gap: 10px;*/
+
+  font-family: 'Cairo', sans-serif;
 }
 
-.header {
-  grid-area: h;
-  background-color: #800080;
-}
 
-.header img {
-  width: 20px;
-}
 
-.nav {
-  grid-area: n;
-  background-color: #ad66a9;
-}
-
-.content {
-  grid-area: c;
-  background-color: #ecd8e9;
-}
