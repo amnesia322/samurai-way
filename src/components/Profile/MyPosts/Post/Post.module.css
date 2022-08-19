@@ -28,4 +28,5 @@
 .message span {
     align-self: flex-end;
     color: #800080;
+    font-size: 12px;
 }
