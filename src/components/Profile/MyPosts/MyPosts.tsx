@@ -12,7 +12,7 @@ function MyPosts() {
                 <button>Add Post</button>
             </div>
             <div className={s.posts}>
-                <Post message='Hi, how are you?' likes={15}/>
+                <Post message='Hi, how are you? Hi, how are you? Hi, how are you? Hi,Hi, how are you?Hi, how are you?Hi, how are you?Hi, how are you? how are you?Hi, how are you?Hi, how are you?Hi, how are you? Hi, how are you?' likes={15}/>
                 <Post message="It's my first post" likes={20}/>
             </div>
         </div>
