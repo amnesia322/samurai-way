@@ -16,6 +16,10 @@
     color: black;
 }
 
+.active {
+    color: dimgray;
+}
+
 .settings {
     margin-top: 50px;
     color: lightgrey;
