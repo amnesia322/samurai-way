@@ -10,6 +10,7 @@
 .item {
     font-size: 18px;
     color: white;
+    text-decoration: none;
 }
 
 .item:hover {
@@ -17,7 +18,7 @@
 }
 
 .active {
-    color: dimgray;
+    color: gold;
 }
 
 .settings {
