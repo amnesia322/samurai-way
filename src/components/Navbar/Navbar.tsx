@@ -5,8 +5,8 @@ function Navbar() {
 
     return (
         <nav className={s.nav}>
-            <a href='src/components/Navbar/Navbar#a' className={s.item}>Profile</a>
-            <a href='src/components/Navbar/Navbar#a' className={s.item}>Message</a>
+            <a href='/profile' className={s.item}>Profile</a>
+            <a href='/dialogs' className={s.item}>Message</a>
             <a href='src/components/Navbar/Navbar#a' className={s.item}>News</a>
             <a href='src/components/Navbar/Navbar#a' className={s.item}>Music</a>
             <a href='src/components/Navbar/Navbar#a' className={`${s.item} ${s.settings}`}>Settings</a>
