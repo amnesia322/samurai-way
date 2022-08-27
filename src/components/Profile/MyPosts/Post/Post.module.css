@@ -9,17 +9,19 @@
     width: 50px;
     border-radius: 50px;
     align-self: flex-end;
+    border: 3px solid #ecd8e9;
 }
 
 .message {
     min-height: 70px;
-    background-color: white;
+    background-color: #ecd8e9;
     min-width: 200px;
     text-align: center;
     border-radius: 15px;
     display: flex;
     justify-content: space-around;
     padding: 10px;
+    margin: 0 10px;
 }
 
 .textMessage {
