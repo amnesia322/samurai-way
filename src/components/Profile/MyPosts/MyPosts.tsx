@@ -6,13 +6,14 @@ import Post from "./Post/Post";
 function MyPosts() {
 
     return (
-        <div> My posts
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
             <div>
-                <textarea></textarea>
-                <button>Add Post</button>
+                <textarea className={s.textArea}></textarea>
+                <button className={s.buttonAdd}>Add Post</button>
             </div>
             <div className={s.posts}>
-                <Post message='Hi, how are you? Hi, how are you? Hi, how are you? Hi,Hi, how are you?Hi, how are you?Hi, how are you?Hi, how are you? how are you?Hi, how are you?Hi, how are you?Hi, how are you? Hi, how are you?' likes={15}/>
+                <Post message='Hi, how are you?' likes={15}/>
                 <Post message="It's my first post" likes={20}/>
             </div>
         </div>

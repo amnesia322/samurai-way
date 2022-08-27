@@ -1,0 +1,12 @@
+.postsBlock {
+    padding: 10px;
+}
+
+.textArea {
+    display: block;
+}
+
+.buttonAdd {
+    display: block;
+    margin: 10px 0 10px 0;
+}
