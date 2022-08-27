@@ -2,8 +2,19 @@ import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 
+type PostDataType = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+
 
 function MyPosts() {
+    //BLL
+    let postData: Array<PostDataType> = [
+        {id: 1, message: 'Hi, how are you?', likesCount: 34},
+        {id: 1, message: 'It\'s my first post', likesCount: 23}
+    ]
 
     return (
         <div className={s.postsBlock}>
@@ -13,8 +24,9 @@ function MyPosts() {
                 <button className={s.buttonAdd}>Add Post</button>
             </div>
             <div className={s.posts}>
-                <Post message='Hi, how are you?' likes={15}/>
-                <Post message="It's my first post" likes={20}/>
+                {postData.map(p => {
+                    return <Post message={p.message} likes={p.likesCount} key={p.id}/>
+                })}
             </div>
         </div>
     );
