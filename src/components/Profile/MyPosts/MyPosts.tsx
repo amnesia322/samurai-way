@@ -13,8 +13,10 @@ function MyPosts() {
     //BLL
     let postData: Array<PostDataType> = [
         {id: 1, message: 'Hi, how are you?', likesCount: 34},
-        {id: 1, message: 'It\'s my first post', likesCount: 23}
+        {id: 2, message: 'It\'s my first post', likesCount: 23},
+        {id: 3, message: 'Nice to meet you!', likesCount: 48}
     ]
+    const postsElements = postData.map(p => <Post message={p.message} likes={p.likesCount} key={p.id}/>)
 
     return (
         <div className={s.postsBlock}>
@@ -24,9 +26,7 @@ function MyPosts() {
                 <button className={s.buttonAdd}>Add Post</button>
             </div>
             <div className={s.posts}>
-                {postData.map(p => {
-                    return <Post message={p.message} likes={p.likesCount} key={p.id}/>
-                })}
+                {postsElements}
             </div>
         </div>
     );

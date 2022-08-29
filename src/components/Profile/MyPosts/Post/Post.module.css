@@ -1,12 +1,12 @@
 .item {
-    padding: 15px;
+    padding: 7px;
     display: flex;
 }
 
 
 .item img {
-    max-height: 50px;
-    width: 50px;
+    max-height: 40px;
+    width: 40px;
     border-radius: 50px;
     align-self: flex-end;
     border: 3px solid #ecd8e9;
@@ -20,7 +20,7 @@
     border-radius: 15px;
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 5px;
     margin: 0 10px;
 }
 
