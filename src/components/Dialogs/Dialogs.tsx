@@ -41,6 +41,8 @@ const Dialogs = () => {
         {id: 6, name: 'Valera'},
     ]
 
+    let dialogsElement = dialogsData.map( d => <DialogItem id={d.id} name={d.name}/>)
+
     let messagesDada: Array<messagesDadaType> = [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'how are u?'},
@@ -48,18 +50,16 @@ const Dialogs = () => {
         {id: 4, message: 'vozmite menya rabotat)'},
     ]
 
+    let messagesElement = messagesDada.map( m => <Message message={m.message} id={m.id}/>)
+
     //UI
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {dialogsData.map( d => {
-                    return  <DialogItem id={d.id} name={d.name}/>
-                })}
+                {dialogsElement}
             </div>
             <div className={s.messages}>
-                {messagesDada.map( m => {
-                    return <Message message={m.message} id={m.id}/>
-                })}
+                {messagesElement}
             </div>
         </div>
     )
