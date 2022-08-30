@@ -23,7 +23,7 @@ type messagesDadaType = {
 }
 
 const DialogItem = (props: DialogItemType) => {
-    return <div className={s.dialog}><NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink></div>
+    return <div className={s.dialog}><NavLink to={'/dialogs/' + props.id} className={s.dialogLink}>{props.name}</NavLink></div>
 }
 
 const Message = (props: MessageType) => {

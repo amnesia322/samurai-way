@@ -8,7 +8,17 @@
 }
 
 .dialog {
+   text-align: center;
 
+    transition: 200ms linear;
+}
+
+.dialog:hover {
+    background-color: #ecd8e9;
+}
+
+.dialogLink {
+    text-decoration: none;
 }
 
 .messages {
