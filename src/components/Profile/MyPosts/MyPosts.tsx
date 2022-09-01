@@ -1,17 +1,16 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {PostDataType} from "../Profile";
+import {PostDataType} from "../../../index";
 
-export type MyPostsType = {
+export type MyPostsPropsType = {
     postData: Array<PostDataType>
 }
 
 
-function MyPosts(props: MyPostsType) {
+function MyPosts(props: MyPostsPropsType) {
     //BLL
     const postsElements = props.postData.map(p => <Post message={p.message} likes={p.likesCount} key={p.id}/>)
-
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
