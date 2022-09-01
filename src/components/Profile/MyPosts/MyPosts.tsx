@@ -8,7 +8,6 @@ export type MyPostsType = {
 }
 
 
-
 function MyPosts(props: MyPostsType) {
     //BLL
     const postsElements = props.postData.map(p => <Post message={p.message} likes={p.likesCount} key={p.id}/>)

@@ -1,20 +1,24 @@
 .dialogs {
     display: grid;
     grid-template-columns: 3fr 10fr;
+
 }
 
 .dialogsItems {
- padding: 10px;
+    padding: 10px;
+    background-color: #ecd8e9;
 }
 
 .dialog {
-   text-align: center;
-
+    text-align: center;
+    border-radius: 12px;
     transition: 200ms linear;
+
 }
 
 .dialog:hover {
-    background-color: #ecd8e9;
+    background-color: white;
+    box-shadow: gray 1px 1px 1px;
 }
 
 .dialogLink {
@@ -22,7 +26,7 @@
 }
 
 .messages {
- padding: 10px;
+    padding: 10px;
 }
 
 .message {

@@ -25,7 +25,7 @@ const Dialogs = () => {
         {id: 5, name: 'Ivan'},
         {id: 6, name: 'Valera'},
     ]
-    let dialogsElement = dialogsData.map( d => <DialogItem id={d.id} name={d.name}/>)
+    let dialogsElement = dialogsData.map(d => <DialogItem id={d.id} name={d.name}/>)
 
     let messagesData: Array<messagesDataType> = [
         {id: 1, message: 'Hi'},
@@ -33,7 +33,7 @@ const Dialogs = () => {
         {id: 3, message: 'crazy project!'},
         {id: 4, message: 'vozmite menya rabotat)'},
     ]
-    let messagesElement = messagesData.map( m => <Message message={m.message} id={m.id}/>)
+    let messagesElement = messagesData.map(m => <Message message={m.message} id={m.id}/>)
 
     //UI
     return (
