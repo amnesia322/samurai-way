@@ -17,7 +17,7 @@ function MyPosts(props: MyPostsPropsType) {
             <h3>My posts</h3>
             <div>
                 <textarea className={s.textArea} value='aslsss'></textarea>
-                <button className={s.buttonAdd} >Add Post</button>
+                <button className={s.buttonAdd}>Add Post</button>
             </div>
             <div className={s.posts}>
                 {postsElements}

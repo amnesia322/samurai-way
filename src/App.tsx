@@ -22,8 +22,8 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' render={ ()=> <Profile postData={props.state.postData} /> }/>
-                    <Route path='/dialogs' render={ ()=> <Dialogs dialogsData={props.state.dialogsData} messagesData={props.state.messagesData}/>}/>
+                    <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>
             </div>
         </BrowserRouter>

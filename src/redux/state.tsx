@@ -1,4 +1,3 @@
-import React from 'react';
 import {v1} from "uuid";
 
 export type dialogsDataType = {
@@ -17,25 +16,29 @@ export type PostDataType = {
 
 
 let state = {
-    dialogsData: [
-        {id: v1(), name: 'Dimych'},
-        {id: v1(), name: 'Daniil'},
-        {id: v1(), name: 'Rogoz'},
-        {id: v1(), name: 'Vitaliy'},
-        {id: v1(), name: 'Ivan'},
-        {id: v1(), name: 'Valera'},
-    ],
-    messagesData: [
-        {id: v1(), message: 'Hi'},
-        {id: v1(), message: 'how are u?'},
-        {id: v1(), message: 'crazy project!'},
-        {id: v1(), message: 'vozmite menya rabotat)'},
-    ],
-    postData: [
-        {id: v1(), message: 'Hi, how are you?', likesCount: 34},
-        {id: v1(), message: 'It\'s my first post', likesCount: 23},
-        {id: v1(), message: 'Nice to meet you!', likesCount: 48}
-    ]
+    profilePage: {
+        postData: [
+            {id: v1(), message: 'Hi, how are you?', likesCount: 34},
+            {id: v1(), message: 'It\'s my first post', likesCount: 23},
+            {id: v1(), message: 'Nice to meet you!', likesCount: 48}
+        ]
+    },
+    dialogsPage: {
+        dialogsData: [
+            {id: v1(), name: 'Dimych'},
+            {id: v1(), name: 'Daniil'},
+            {id: v1(), name: 'Rogoz'},
+            {id: v1(), name: 'Vitaliy'},
+            {id: v1(), name: 'Ivan'},
+            {id: v1(), name: 'Valera'},
+        ],
+        messagesData: [
+            {id: v1(), message: 'Hi'},
+            {id: v1(), message: 'how are u?'},
+            {id: v1(), message: 'crazy project!'},
+            {id: v1(), message: 'vozmite menya rabotat)'},
+        ],
+    }
 }
 
 export default state
