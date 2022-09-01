@@ -2,43 +2,49 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import state from "./redux/state";
 
 //BLL
-export type dialogsDataType = {
-    id: number,
+/*export type dialogsDataType = {
+    id: string,
     name: string
 }
 export type messagesDataType = {
-    id: number,
+    id: string,
     message: string
 }
 export type PostDataType = {
-    id: number,
+    id: string,
     message: string,
     likesCount: number
 }
 
 const dialogsData: Array<dialogsDataType> = [
-    {id: 1, name: 'Dimych'},
-    {id: 2, name: 'Daniil'},
-    {id: 3, name: 'Rogoz'},
-    {id: 4, name: 'Vitaliy'},
-    {id: 5, name: 'Ivan'},
-    {id: 6, name: 'Valera'},
+    {id: v1(), name: 'Dimych'},
+    {id: v1(), name: 'Daniil'},
+    {id: v1(), name: 'Rogoz'},
+    {id: v1(), name: 'Vitaliy'},
+    {id: v1(), name: 'Ivan'},
+    {id: v1(), name: 'Valera'},
 ]
 const messagesData: Array<messagesDataType> = [
-    {id: 1, message: 'Hi'},
-    {id: 2, message: 'how are u?'},
-    {id: 3, message: 'crazy project!'},
-    {id: 4, message: 'vozmite menya rabotat)'},
+    {id: v1(), message: 'Hi'},
+    {id: v1(), message: 'how are u?'},
+    {id: v1(), message: 'crazy project!'},
+    {id: v1(), message: 'vozmite menya rabotat)'},
 ]
-const postData: Array<PostDataType> = [
-    {id: 1, message: 'Hi, how are you?', likesCount: 34},
-    {id: 2, message: 'It\'s my first post', likesCount: 23},
-    {id: 3, message: 'Nice to meet you!', likesCount: 48}
-]
+const postData = [
+    {id: v1(), message: 'Hi, how are you?', likesCount: 34},
+    {id: v1(), message: 'It\'s my first post', likesCount: 23},
+    {id: v1(), message: 'Nice to meet you!', likesCount: 48}
+]*/
+
+/*const addPost = (/!*messageText: string*!/) => {
+    let newPost = {id: v1(), message: 'lalala'/!*messageText*!/, likesCount: 0}
+    setPostData([newPost, ...postData])
+}*/
 
 ReactDOM.render(
-    <App dialogsData={dialogsData} messagesData={messagesData} postData={postData}/>,
+    <App state={state}/>,
   document.getElementById('root')
 );

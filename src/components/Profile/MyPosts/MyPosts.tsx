@@ -1,7 +1,8 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {PostDataType} from "../../../index";
+import {PostDataType} from "../../../redux/state";
+
 
 export type MyPostsPropsType = {
     postData: Array<PostDataType>
@@ -15,8 +16,8 @@ function MyPosts(props: MyPostsPropsType) {
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
-                <textarea className={s.textArea}></textarea>
-                <button className={s.buttonAdd}>Add Post</button>
+                <textarea className={s.textArea} value='aslsss'></textarea>
+                <button className={s.buttonAdd} >Add Post</button>
             </div>
             <div className={s.posts}>
                 {postsElements}
