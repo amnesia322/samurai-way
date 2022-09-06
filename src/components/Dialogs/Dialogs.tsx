@@ -16,6 +16,11 @@ type DialogsType = {
 const Dialogs = (props: DialogsType) => {
     let dialogsElement = props.state.dialogsData.map(d => <DialogItem id={d.id} name={d.name} img={d.img}/>)
     let messagesElement = props.state.messagesData.map(m => <Message message={m.message} id={m.id}/>)
+
+    const newMessageElement: any = React.createRef()
+    const addMessage = () => {
+        alert(newMessageElement.current.value)
+    }
     //UI
     return (
         <div className={s.dialogs}>
@@ -24,7 +29,12 @@ const Dialogs = (props: DialogsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElement}
+                <div>
+                    <textarea ref={newMessageElement}></textarea>
+                    <button onClick={addMessage}>Send message</button>
+                </div>
             </div>
+
         </div>
     )
 }

@@ -10,13 +10,14 @@ type ProfileStateType = {
 
 type ProfilePropsType = {
     state: ProfileStateType
+    addPost: (message: string) => void
 }
 
 function Profile(props: ProfilePropsType) {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts postData={props.state.postData}/>
+            <MyPosts postData={props.state.postData} addPost={props.addPost}/>
         </div>
     );
 }
