@@ -3,6 +3,7 @@ import {v1} from "uuid";
 export type dialogsDataType = {
     id: string,
     name: string
+    img: string
 }
 export type messagesDataType = {
     id: string,
@@ -25,12 +26,12 @@ let state = {
     },
     dialogsPage: {
         dialogsData: [
-            {id: v1(), name: 'Dimych'},
-            {id: v1(), name: 'Daniil'},
-            {id: v1(), name: 'Rogoz'},
-            {id: v1(), name: 'Vitaliy'},
-            {id: v1(), name: 'Ivan'},
-            {id: v1(), name: 'Valera'},
+            {id: v1(), name: 'Dimych', img: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png"},
+            {id: v1(), name: 'Daniil', img: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png"},
+            {id: v1(), name: 'Rogoz', img: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png"},
+            {id: v1(), name: 'Vitaliy', img: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png"},
+            {id: v1(), name: 'Maria', img: "https://cdn-icons-png.flaticon.com/512/194/194938.png"},
+            {id: v1(), name: 'Valera', img: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png"},
         ],
         messagesData: [
             {id: v1(), message: 'Hi'},
@@ -38,6 +39,9 @@ let state = {
             {id: v1(), message: 'crazy project!'},
             {id: v1(), message: 'vozmite menya rabotat)'},
         ],
+    },
+    navbar: {
+
     }
 }
 

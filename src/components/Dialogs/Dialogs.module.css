@@ -7,13 +7,24 @@
 .dialogsItems {
     padding: 10px;
     background-color: #ecd8e9;
+
+}
+
+.avatar {
+    max-width: 40px;
+    flex: 0 0 40px;
+    padding-left: 10px;
+    border-radius: 45px;
 }
 
 .dialog {
     text-align: center;
     border-radius: 12px;
     transition: 200ms linear;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0;
 }
 
 .dialog:hover {
@@ -21,8 +32,14 @@
     box-shadow: gray 1px 1px 1px;
 }
 
+.dialogLink:focus {
+   font-weight: 700;
+}
+
 .dialogLink {
+    color: #1B1F47;
     text-decoration: none;
+    flex: 1 1 auto;
 }
 
 .messages {
