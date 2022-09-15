@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {rerenderEntireTree} from "../render";
+
 
 export type dialogsDataType = {
     id: string,
@@ -56,6 +58,7 @@ let state: RootStateType = {
 export const addPost = (message: string) => {
     const newPost = {id: v1(), message, likesCount: 0}
     state.profilePage.postData.push(newPost)
+    rerenderEntireTree(state)
 }
 
 export default state
