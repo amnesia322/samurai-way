@@ -9,14 +9,25 @@ export type messagesDataType = {
     id: string,
     message: string
 }
+export type dialogsPageType = {
+    dialogsData: Array<dialogsDataType>
+    messagesData: Array<messagesDataType>
+}
+export type profilePageType = {
+    postData: Array<PostDataType>
+}
 export type PostDataType = {
     id: string,
     message: string,
     likesCount: number
 }
+export type RootStateType = {
+     profilePage: profilePageType
+    dialogsPage: dialogsPageType
+}
 
 
-let state = {
+let state: RootStateType = {
     profilePage: {
         postData: [
             {id: v1(), message: 'Hi, how are you?', likesCount: 34},
@@ -40,9 +51,6 @@ let state = {
             {id: v1(), message: 'vozmite menya rabotat)'},
         ],
     },
-    navbar: {
-
-    }
 }
 
 export const addPost = (message: string) => {

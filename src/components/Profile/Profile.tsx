@@ -13,7 +13,7 @@ type ProfilePropsType = {
     addPost: (message: string) => void
 }
 
-function Profile(props: ProfilePropsType) {
+function Profile (props: ProfilePropsType) {
     return (
         <div className={s.content}>
             <ProfileInfo/>
