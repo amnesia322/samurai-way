@@ -3,19 +3,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import state, {RootStateType, subscribe} from "./redux/state";
+import store, {RootStateType} from "./redux/state";
 
 
 
  const rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state}/>
+            <App state={store.getState()} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>
         </BrowserRouter>, document.getElementById('root')
     );
 }
 
-rerenderEntireTree(state)
+rerenderEntireTree(store.getState())
 
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
