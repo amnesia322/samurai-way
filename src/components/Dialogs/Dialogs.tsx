@@ -22,7 +22,7 @@ const Dialogs = (props: DialogsType) => {
 
     const newMessageElement: any = React.createRef()
     const addMessage = () => {
-        let action = addMessageAC(newMessageElement.current.value)
+        let action = addMessageAC()
         props.dispatch(action)
     }
     const onChangeMessage = () => {
