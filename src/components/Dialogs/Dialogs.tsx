@@ -9,8 +9,6 @@ import {
     updateNewMessageTextAC
 } from "../../redux/state";
 
-
-
 type DialogsType = {
     state: dialogsPageType
     dispatch: (action: dispatchActionType) => void
@@ -29,7 +27,6 @@ const Dialogs = (props: DialogsType) => {
         let action = updateNewMessageTextAC(newMessageElement.current.value)
         props.dispatch(action)
     }
-
 
     //UI
     return (

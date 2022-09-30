@@ -1,7 +1,5 @@
 import {v1} from "uuid";
 
-
-
 export type dialogsDataType = {
     id: string,
     name: string
@@ -30,9 +28,7 @@ export type RootStateType = {
     dialogsPage: dialogsPageType
     navbar: any
 }
-export type dispatchActionType = tsarType
-export type tsarType = addPostACType | updateNewPostTextACType | addMessageACType | updateNewMessageTextACType
-export type ActionType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT'
+export type dispatchActionType =  addPostACType | updateNewPostTextACType | addMessageACType | updateNewMessageTextACType
 export type addPostACType = ReturnType<typeof addPostAC>
 export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export type addMessageACType = ReturnType<typeof addMessageAC>
