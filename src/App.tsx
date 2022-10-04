@@ -3,15 +3,15 @@ import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import { Route} from "react-router-dom";
-import {dispatchActionType, RootStateType} from "./redux/state";
+import {dispatchActionType, RootStateType} from "./redux/store";
+import {Store} from "redux";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 export type AppPropsType = {
     state: RootStateType
-    // addPost: (message: string) => void
-    // updateNewPostText: (newText: string) => void
     dispatch: (action: dispatchActionType) => void
+    store: Store<RootStateType>
 }
 
 function App(props: AppPropsType) {
@@ -20,10 +20,10 @@ function App(props: AppPropsType) {
 
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar state={props.state.navbar}/>
+                <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>}/>
-                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
+                    <Route path='/profile' render={() => <Profile  store={props.store}/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
                 </div>
             </div>
 

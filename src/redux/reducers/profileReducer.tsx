@@ -1,7 +1,17 @@
 import {v1} from "uuid";
-import {dispatchActionType, profilePageType} from "../state";
+import {dispatchActionType, profilePageType} from "../store";
 
-const profileReducer = (state: profilePageType, action: dispatchActionType) => {
+let initialState = {
+    postData: [
+        {id: v1(), message: 'Hi, how are you?', likesCount: 34},
+        {id: v1(), message: 'It\'s my first post', likesCount: 23},
+        {id: v1(), message: 'Nice to meet you!', likesCount: 48}
+    ],
+    newPostText: ''
+}
+
+
+const profileReducer = (state: profilePageType = initialState, action: dispatchActionType) => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost = {id: v1(), message: state.newPostText, likesCount: 0}
