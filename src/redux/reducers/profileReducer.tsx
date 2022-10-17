@@ -25,12 +25,9 @@ const profileReducer = (state: profilePageType = initialState, action: dispatchA
     switch (action.type) {
         case 'ADD-POST':
             const newPost = {id: v1(), message: state.newPostText, likesCount: 0}
-            state.postData.push(newPost)
-            state.newPostText = ''
-            return state;
+            return {...state, postData: [...state.postData, newPost], newPostText: ''};
         case 'UPDATE-NEW-POST-TEXT':
-            state.newPostText = action.value;
-            return state;
+            return {...state, newPostText: action.value};
         default:
             return state
     }

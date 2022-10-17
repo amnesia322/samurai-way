@@ -3,11 +3,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import store, {AppStateType} from "./redux/redux-store";
+import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 
 
-const rerenderEntireTree = (state: AppStateType) => {
+const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -17,9 +17,9 @@ const rerenderEntireTree = (state: AppStateType) => {
     );
 }
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 
 
 store.subscribe(() => {
-    rerenderEntireTree(store.getState())
+    rerenderEntireTree()
 });
