@@ -3,15 +3,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import  {RootStateType} from "./redux/store";
-import store from "./redux/redux-store";
+import store, {AppStateType} from "./redux/redux-store";
+import {Provider} from "react-redux";
 
 
-
- const rerenderEntireTree = (state: RootStateType) => {
+const rerenderEntireTree = (state: AppStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} dispatch={store.dispatch.bind(store)} store={store}/>
+            <Provider store={store}>
+                <App />
+            </Provider>
         </BrowserRouter>, document.getElementById('root')
     );
 }

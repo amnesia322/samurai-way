@@ -5,11 +5,13 @@ import dialogsReducer from "./reducers/dialogsReducer";
 
 
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer
 });
 
-let store = createStore(reducers);
+let store = createStore(rootReducer);
+
+export type AppStateType = ReturnType<typeof rootReducer>
 
 export default store;

@@ -1,5 +1,21 @@
 import {v1} from "uuid";
-import {dialogsPageType, dispatchActionType} from "../store";
+import { dispatchActionType} from "../store";
+
+export type dialogsPageType = {
+    dialogsData: Array<dialogsDataType>
+    messagesData: Array<messagesDataType>
+    newMessageText: string
+}
+export type dialogsDataType = {
+    id: string,
+    name: string
+    img: string
+}
+export type messagesDataType = {
+    id: string,
+    message: string
+}
+
 
 let initialState = {
     dialogsData: [
@@ -39,16 +55,14 @@ let initialState = {
     newMessageText: ''
 }
 
-const dialogsReducer = (state: dialogsPageType = initialState, action: dispatchActionType) => {
+const dialogsReducer = (state: dialogsPageType = initialState, action: dispatchActionType): dialogsPageType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             const newMessage = {id: v1(), message: state.newMessageText}
-            state.messagesData.push(newMessage)
-            state.newMessageText = ''
-            return state;
+            return {...state, messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''};
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessageText = action.value;
-            return state;
+            return {...state, newMessageText: action.message};
         default:
             return state;
     }
@@ -63,7 +77,7 @@ export const addMessageAC = () => {
 export const updateNewMessageTextAC = (newMessage: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-TEXT",
-        value: newMessage
+        message: newMessage
     } as const
 }
 

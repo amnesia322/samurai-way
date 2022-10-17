@@ -3,25 +3,25 @@ import dialogsReducer, {addMessageAC, updateNewMessageTextAC} from "./reducers/d
 import profileReducer, {addPostAC, updateNewPostTextAC} from "./reducers/profileReducer";
 import {EmptyObject} from "redux";
 
-export type dialogsDataType = {
+ type dialogsDataType = {
     id: string,
     name: string
     img: string
 }
-export type messagesDataType = {
+ type messagesDataType = {
     id: string,
     message: string
 }
-export type dialogsPageType = {
+type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
     messagesData: Array<messagesDataType>
     newMessageText: string
 }
-export type profilePageType = {
+ type profilePageType = {
     postData: Array<PostDataType>
     newPostText: string
 }
-export type PostDataType = {
+ type PostDataType = {
     id: string,
     message: string,
     likesCount: number
