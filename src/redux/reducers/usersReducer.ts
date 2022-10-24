@@ -1,8 +1,9 @@
 import {v1} from "uuid";
 
-type ActionsTypes = FollowACType | UnFollowACType
+type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unfollowAC>
+type SetUsersACType = ReturnType<typeof setUsersAC>
 type UserType = {
     id: string,
     followed: boolean,
@@ -31,14 +32,33 @@ const usersReducer = (state: UsersPageType  = initialState, action: ActionsTypes
         case 'UNFOLLOW':
             return {...state,
                 users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
+        case 'SET-USERS':
+            return state
         default:
             return state
     }
 }
 
 
-export const followAC = (id: string) => ({type: 'FOLLOW', userID: id})
-export const unfollowAC = (id: string) => ({type: 'UNFOLLOW', userID: id})
+export const followAC = (id: string) => {
+    return {
+        type: 'FOLLOW', userID: id
+    } as const
+}
+export const unfollowAC = (id: string) => {
+    return {
+        type: 'UNFOLLOW',
+        userID: id
+    } as const
+}
+
+export const setUsersAC = (users: Array<UserType>) => {
+    return {
+    type: 'SET-USERS',
+        users: users
+    } as const
+}
+
 
 
 export default usersReducer;

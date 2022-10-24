@@ -1,6 +1,8 @@
 import {v1} from "uuid";
-import {dispatchActionType} from "../store";
 
+type ActionsType = addPostACType | updateNewPostTextACType
+export type addPostACType = ReturnType<typeof addPostAC>
+export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export type PostDataType = {
     id: string,
     message: string,
@@ -21,7 +23,7 @@ let initialState = {
 }
 
 
-const profileReducer = (state: profilePageType = initialState, action: dispatchActionType): profilePageType => {
+const profileReducer = (state: profilePageType = initialState, action: ActionsType): profilePageType => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost = {id: v1(), message: state.newPostText, likesCount: 0}

@@ -1,9 +1,9 @@
 import {v1} from "uuid";
-import dialogsReducer, {addMessageAC, updateNewMessageTextAC} from "./reducers/dialogsReducer";
-import profileReducer, {addPostAC, updateNewPostTextAC} from "./reducers/profileReducer";
+import dialogsReducer from "./reducers/dialogsReducer";
+import profileReducer from "./reducers/profileReducer";
 import {EmptyObject} from "redux";
 
- type dialogsDataType = {
+type dialogsDataType = {
     id: string,
     name: string
     img: string
@@ -27,11 +27,7 @@ type dialogsPageType = {
     likesCount: number
 }
 export type RootStateType = EmptyObject & { profilePage: profilePageType; dialogsPage: dialogsPageType;}
-export type dispatchActionType = addPostACType | updateNewPostTextACType | addMessageACType | updateNewMessageTextACType
-export type addPostACType = ReturnType<typeof addPostAC>
-export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
-export type addMessageACType = ReturnType<typeof addMessageAC>
-export type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
+
 
 const store = {
     _state: {
@@ -91,7 +87,7 @@ const store = {
         this._callSubscriber = observer
     },
 
-    dispatch(action: dispatchActionType) {
+    dispatch(action: any) {
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.profilePage = profileReducer(this._state.profilePage, action)
 

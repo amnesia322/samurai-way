@@ -1,5 +1,9 @@
 import {v1} from "uuid";
-import { dispatchActionType} from "../store";
+
+type ActionsType = addMessageACType | updateNewMessageTextACType
+
+export type addMessageACType = ReturnType<typeof addMessageAC>
+export type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
 
 export type dialogsPageType = {
     dialogsData: Array<dialogsDataType>
@@ -55,7 +59,7 @@ let initialState = {
     newMessageText: ''
 }
 
-const dialogsReducer = (state: dialogsPageType = initialState, action: dispatchActionType): dialogsPageType => {
+const dialogsReducer = (state: dialogsPageType = initialState, action: ActionsType): dialogsPageType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             const newMessage = {id: v1(), message: state.newMessageText}
