@@ -9,6 +9,7 @@ function Navbar() {
         <nav className={s.nav}>
             <NavLink to='/profile' className={s.item} activeClassName={s.active}>Profile</NavLink>
             <NavLink to='/dialogs' className={s.item} activeClassName={s.active}>Message</NavLink>
+            <NavLink to='/users' className={s.item} activeClassName={s.active}>Users</NavLink>
             <a href='src/components/Navbar/Navbar#a' className={s.item}>News</a>
             <a href='src/components/Navbar/Navbar#a' className={s.item}>Music</a>
             <a href='src/components/Navbar/Navbar#a' className={`${s.item} ${s.settings}`}>Settings</a>
