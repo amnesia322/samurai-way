@@ -4,8 +4,9 @@ type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unfollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
-type UserType = {
+export type UserType = {
     id: string,
+    photoURL: string
     followed: boolean,
     fullName: string,
     status: string,
@@ -17,9 +18,12 @@ export type UsersPageType = {
 
 let initialState = {
     users: [
-        {id: v1(), followed: true, fullName: 'Dmitriy', status: 'Im boss!', location: {country: 'Belarus', city: 'Minsk'}},
-        {id: v1(), followed: true, fullName: 'Vitaliy', status: 'Whats up?!', location: {country: 'Russia', city: 'Moscow'}},
-        {id: v1(), followed: false, fullName: 'amnesia', status: 'find for job', location: {country: 'Russia', city: 'Voronezh'}},
+        {id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
+            followed: true, fullName: 'Dmitriy', status: 'Im boss!', location: {country: 'Belarus', city: 'Minsk'}},
+        {id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
+            followed: true, fullName: 'Vitaliy', status: 'Whats up?!', location: {country: 'Russia', city: 'Moscow'}},
+        {id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
+            followed: false, fullName: 'amnesia', status: 'find for job', location: {country: 'Russia', city: 'Voronezh'}},
     ],
 }
 
@@ -33,7 +37,7 @@ const usersReducer = (state: UsersPageType  = initialState, action: ActionsTypes
             return {...state,
                 users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
         case 'SET-USERS':
-            return state
+            return {...state, users: [...state.users, ...action.users]}
         default:
             return state
     }
