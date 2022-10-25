@@ -1,30 +1,36 @@
-import {v1} from "uuid";
+
 
 type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unfollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
+// export type UserType = {
+//     id: string,
+//     photoURL: string
+//     followed: boolean,
+//     fullName: string,
+//     status: string,
+//     location: {country: string, city: string}
+// }
+
 export type UserType = {
-    id: string,
-    photoURL: string
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: {country: string, city: string}
+    "name": string,
+    "id": number,
+    "photos": {
+    "small": string | null,
+        "large": string | null
+},
+    "status": string | null,
+    "followed": boolean
 }
+
+
 export type UsersPageType = {
     users: Array<UserType>
 }
 
-let initialState = {
-    users: [
-        {id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
-            followed: true, fullName: 'Dmitriy', status: 'Im boss!', location: {country: 'Belarus', city: 'Minsk'}},
-        {id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
-            followed: true, fullName: 'Vitaliy', status: 'Whats up?!', location: {country: 'Russia', city: 'Moscow'}},
-        {id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
-            followed: false, fullName: 'amnesia', status: 'find for job', location: {country: 'Russia', city: 'Voronezh'}},
-    ],
+let initialState: UsersPageType = {
+    users: []
 }
 
 
@@ -44,18 +50,17 @@ const usersReducer = (state: UsersPageType  = initialState, action: ActionsTypes
 }
 
 
-export const followAC = (id: string) => {
+export const followAC = (id: number) => {
     return {
         type: 'FOLLOW', userID: id
     } as const
 }
-export const unfollowAC = (id: string) => {
+export const unfollowAC = (id: number) => {
     return {
         type: 'UNFOLLOW',
         userID: id
     } as const
 }
-
 export const setUsersAC = (users: Array<UserType>) => {
     return {
     type: 'SET-USERS',
