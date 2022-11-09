@@ -7,15 +7,17 @@ import {UserType} from "../../redux/reducers/usersReducer";
 
 export class UsersC extends React.Component<any>/*<()=> React.ReactNode, ()=> React.ReactNode, ()=> React.ReactNode>*/ {
 
-    constructor(props: any) {
-        super(props);
+    // constructor(props: any) {
+    //     super(props);
+    // }
 
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(res => {
                 this.props.setUsers(res.data.items)
             })
-
     }
+
 
     render(): ReactNode {
         return <div>
