@@ -1,7 +1,8 @@
-type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType
+type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType | setCurrentPageACType
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unfollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
+type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 // export type UserType = {
 //     id: string,
 //     photoURL: string
@@ -25,10 +26,16 @@ export type UserType = {
 
 export type UsersPageType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState: UsersPageType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 20,
+    currentPage: 1
 }
 
 
@@ -45,7 +52,9 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes)
                 users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)
             }
         case 'SET-USERS':
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [...action.users]}
+        case 'SET-CURRENT-PAGE':
+            return {...state, currentPage: action.page}
         default:
             return state
     }
@@ -67,6 +76,13 @@ export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: 'SET-USERS',
         users: users
+    } as const
+}
+
+export const setCurrentPageAC = (page: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        page: page
     } as const
 }
 
