@@ -15,6 +15,7 @@ export class UsersC extends React.Component<any>/*<()=> React.ReactNode, ()=> Re
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(res => {
                 this.props.setUsers(res.data.items)
+                this.props.setTotalCount(res.data.totalCount)
             })
     }
 
@@ -32,7 +33,7 @@ export class UsersC extends React.Component<any>/*<()=> React.ReactNode, ()=> Re
 
         let pages = []
 
-        for (let i = 1; i <= pagesCount; i++) {
+        for (let i = 1; i <= 10; i++) {
             pages.push(i)
         }
 

@@ -1,8 +1,9 @@
-type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType | setCurrentPageACType
+type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType | setCurrentPageACType | setTotalCountACType
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unfollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type setTotalCountACType = ReturnType<typeof setTotalCountAC>
 // export type UserType = {
 //     id: string,
 //     photoURL: string
@@ -33,8 +34,8 @@ export type UsersPageType = {
 
 let initialState: UsersPageType = {
     users: [],
-    pageSize: 5,
-    totalUsersCount: 20,
+    pageSize: 10,
+    totalUsersCount: 0,
     currentPage: 1
 }
 
@@ -55,6 +56,8 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes)
             return {...state, users: [...action.users]}
         case 'SET-CURRENT-PAGE':
             return {...state, currentPage: action.page}
+        case 'SET-TOTAL-COUNT':
+            return {...state, totalUsersCount: action.count}
         default:
             return state
     }
@@ -83,6 +86,13 @@ export const setCurrentPageAC = (page: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         page: page
+    } as const
+}
+
+export const setTotalCountAC = (count: number) => {
+    return {
+        type: 'SET-TOTAL-COUNT',
+        count: count
     } as const
 }
 
