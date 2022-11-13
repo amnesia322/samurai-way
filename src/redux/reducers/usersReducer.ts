@@ -1,4 +1,8 @@
-type ActionsTypes = FollowACType | UnFollowACType | SetUsersACType | setCurrentPageACType | setTotalCountACType
+type ActionsTypes = FollowACType
+    | UnFollowACType
+    | SetUsersACType
+    | setCurrentPageACType
+    | setTotalCountACType
 type FollowACType = ReturnType<typeof followAC>
 type UnFollowACType = ReturnType<typeof unfollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>

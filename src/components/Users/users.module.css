@@ -4,4 +4,10 @@
 
 .selectedPage {
     font-weight: 700;
+    margin: 5px;
+    font-size: 18px;
+}
+
+.pageButton {
+    margin: 5px;
 }

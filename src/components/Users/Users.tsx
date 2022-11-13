@@ -1,46 +1,73 @@
 import React from 'react';
-import {UsersPropsType} from "./UsersContainer";
 import s from './users.module.css'
 import userPhoto from '../../assets/images/userAvatar.png'
-import axios from "axios";
+import {UserType} from "../../redux/reducers/usersReducer";
 
-const Users = (props: UsersPropsType) => {
-    const getUsers = () => {
-        if (props.users.length === 0) {
+export type UsersPropsType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    onPageChanged: (page: number) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
+}
 
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(res => {
-                    props.setUsers(res.data.items)
-                })
+export const Users = (props: UsersPropsType) => {
+        let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
-            // props.setUsers([
-            //     {
-            //         id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
-            //         followed: true, fullName: 'Dmitriy', status: 'Im boss!', location: {country: 'Belarus', city: 'Minsk'}
-            //     },
-            //     {
-            //         id: v1(), photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
-            //         followed: true, fullName: 'Vitaliy', status: 'Whats up?!', location: {country: 'Russia', city: 'Moscow'}
-            //     },
-            //     {
-            //         id: v1(),
-            //         photoURL: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
-            //         followed: false,
-            //         fullName: 'amnesia',
-            //         status: 'find for job',
-            //         location: {country: 'Russia', city: 'Voronezh'}
-            //     },
-            // ])
+        let pages = []
+
+        for (let i = 1; i <= 10; i++) {
+            pages.push(i)
         }
-    }
 
 
-    //
+        //
 
     return (
-        <div>
+        /*<div>
             <button onClick={getUsers}>Get Users</button>
             {props.users.map(u => {
+                    const onFollowHandler = () => props.follow(u.id);
+                    const onUnfollowHandler = () => props.unfollow(u.id);
+
+                    return <div key={u.id}>
+
+                <span>
+                    <div>
+                        <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={s.avatar}
+                             alt='userAvatar'/>
+                    </div>
+                    <div>
+                        {u.followed ? <button onClick={onUnfollowHandler}>Unfollow</button>
+                            : <button onClick={onFollowHandler}>Follow</button>}
+                    </div>
+                </span>
+                        <span>
+                    <span>
+                        <div>{u.name}</div>
+                        <div>{u.status}</div>
+                    </span>
+                    <span>
+                        <div>"u.location.country"</div>
+                        <div>"u.location.city"</div>
+
+                    </span>
+                </span>
+                    </div>
+                }
+            )}
+        </div>*/
+        <div>
+            <div>
+                {pages.map(p =>
+                    <span className={props.currentPage === p ? s.selectedPage : s.pageButton}
+                          onClick={(e) => props.onPageChanged(p)}>{p}</span>
+                )}
+            </div>
+
+            {props.users.map((u: UserType) => {
                     const onFollowHandler = () => props.follow(u.id);
                     const onUnfollowHandler = () => props.unfollow(u.id);
 
