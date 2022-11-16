@@ -2,6 +2,7 @@ import React from 'react';
 import s from './users.module.css'
 import userPhoto from '../../assets/images/userAvatar.png'
 import {UserType} from "../../redux/reducers/usersReducer";
+import {NavLink} from "react-router-dom";
 
 export type UsersPropsType = {
     users: Array<UserType>
@@ -14,16 +15,16 @@ export type UsersPropsType = {
 }
 
 export const Users = (props: UsersPropsType) => {
-        let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
-        let pages = []
+    let pages = []
 
-        for (let i = 1; i <= 10; i++) {
-            pages.push(i)
-        }
+    for (let i = 1; i <= 10; i++) {
+        pages.push(i)
+    }
 
 
-        //
+    //
 
     return (
         /*<div>
@@ -75,8 +76,9 @@ export const Users = (props: UsersPropsType) => {
 
                 <span>
                     <div>
-                        <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={s.avatar}
-                             alt='userAvatar'/>
+                       <NavLink to={'/profile/' + u.id}><img src={u.photos.small !== null ? u.photos.small : userPhoto}
+                                                            className={s.avatar}
+                                                            alt='userAvatar'/> </NavLink>
                     </div>
                     <div>
                         {u.followed ? <button onClick={onUnfollowHandler}>Unfollow</button>
