@@ -7,7 +7,6 @@ export type ProfileInfoPropsType = {
 }
 
 function ProfileInfo(props: ProfileInfoPropsType) {
-
     return (
         <div>
             <div>
@@ -17,10 +16,10 @@ function ProfileInfo(props: ProfileInfoPropsType) {
             </div>
             <div className={s.descriptionBlock}>
                 {props.profile.fullName}
-                <img src={props.profile.photos.large ||
+                <img src={props.profile.photos.small !== null ? props.profile.photos.small :
                     'https://i.pinimg.com/736x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg'}/>
                 ava + description
-                </div>
+            </div>
         </div>
     );
 }

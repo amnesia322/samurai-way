@@ -31,7 +31,7 @@ export type UserProfileType = {
     fullName: string,
     userId: number,
     photos: {
-        small: null ,
+        small: string | null ,
         large: string | null
     }
 }
@@ -58,7 +58,7 @@ let initialState = {
         lookingForAJob: false,
         lookingForAJobDescription: null,
         fullName: "Alex-cyber1",
-        userId: 26727,
+        userId: 26685,
         photos: {
             small: null,
             large: null

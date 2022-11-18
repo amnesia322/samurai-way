@@ -9,12 +9,11 @@ export type ProfilePropsType = {
     profile: UserProfileType
 }
 
-function Profile (props: ProfilePropsType) {
+function Profile(props: ProfilePropsType) {
     return (
         <div className={s.content}>
-
             <ProfileInfo profile={props.profile}/>
-            <MyPostsContainer />
+            <MyPostsContainer/>
         </div>
     );
 }
