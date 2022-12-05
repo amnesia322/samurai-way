@@ -13,8 +13,8 @@ export type UsersPropsType = {
     onPageChanged: (page: number) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
-    toggleIsFollowingProgress: (isFetching: boolean) => void
-    isFollowingInProgress: boolean
+    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
+    isFollowingInProgress: number[]
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -70,22 +70,22 @@ export const Users = (props: UsersPropsType) => {
 
             {props.users.map((u: UserType) => {
                     const onFollowHandler = () => {
-                        props.toggleIsFollowingProgress(true)
+                        props.toggleIsFollowingProgress(true, u.id)
                         usersAPI.follow(u.id)
                             .then(data => {
                                 if (data.resultCode === 0) {
                                     props.follow(u.id)
-                                    props.toggleIsFollowingProgress(false)
+                                    props.toggleIsFollowingProgress(false, u.id)
                                 }
                             })
                     };
                     const onUnfollowHandler = () => {
-                        props.toggleIsFollowingProgress(true)
+                        props.toggleIsFollowingProgress(true, u.id)
                         usersAPI.unfollow(u.id)
                             .then(data => {
                                 if (data.resultCode === 0) {
                                     props.unfollow(u.id)
-                                    props.toggleIsFollowingProgress(false)
+                                    props.toggleIsFollowingProgress(false, u.id)
                                 }
                             })
                     }
@@ -99,8 +99,10 @@ export const Users = (props: UsersPropsType) => {
                     </div>
                     <div>
                         {u.followed ?
-                            <button onClick={onUnfollowHandler} disabled={props.isFollowingInProgress}>Unfollow</button>
-                            : <button onClick={onFollowHandler} disabled={props.isFollowingInProgress}>Follow</button>}
+                            <button onClick={onUnfollowHandler}
+                                    disabled={props.isFollowingInProgress.some(id => id == u.id)}>Unfollow</button>
+                            : <button onClick={onFollowHandler}
+                                      disabled={props.isFollowingInProgress.some(id => id == u.id)}>Follow</button>}
                     </div>
                 </span>
                         <span>
