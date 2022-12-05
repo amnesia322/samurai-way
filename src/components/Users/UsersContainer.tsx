@@ -1,7 +1,6 @@
 import React, {ReactNode} from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage, setTotalCount,
@@ -10,9 +9,16 @@ import {
     UsersPageType,
     UserType
 } from "../../redux/reducers/usersReducer";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {usersAPI} from "../../api/api";
+
+export const settingsAPI = {
+    withCredentials: true,
+    headers: {
+        "API-KEY": 'f8c9c547-0d03-4fe5-8a49-d0564fd78b8a'
+    }
+}
 
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType;
 
@@ -31,22 +37,23 @@ export class UsersContainer extends React.Component<any> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(res => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
-                this.props.setTotalCount(res.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalCount(data.totalCount)
             })
 
     }
 
     onPageChanged = (page: number) => {
         this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then(res => {
+
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
+                this.props.setUsers(data.items)
+                this.props.setCurrentPage(page);
             });
     }
 

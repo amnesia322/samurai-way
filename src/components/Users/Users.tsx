@@ -3,6 +3,8 @@ import s from './users.module.css'
 import userPhoto from '../../assets/images/userAvatar.png'
 import {UserType} from "../../redux/reducers/usersReducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
+import {settingsAPI} from "./UsersContainer";
 
 export type UsersPropsType = {
     users: Array<UserType>
@@ -16,13 +18,10 @@ export type UsersPropsType = {
 
 export const Users = (props: UsersPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
     let pages = []
-
     for (let i = 1; i <= 10; i++) {
         pages.push(i)
     }
-
 
     //
 
@@ -69,16 +68,31 @@ export const Users = (props: UsersPropsType) => {
             </div>
 
             {props.users.map((u: UserType) => {
-                    const onFollowHandler = () => props.follow(u.id);
-                    const onUnfollowHandler = () => props.unfollow(u.id);
+                    const onFollowHandler = () => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
+                            settingsAPI)
+                            .then(res => {
+                                if (res.data.resultCode === 0) {
+                                    props.follow(u.id)
+                                }
+                            })
+                    };
+                    const onUnfollowHandler = () => {
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                            settingsAPI)
+                            .then(res => {
+                                if (res.data.resultCode === 0) {
+                                    props.unfollow(u.id)
+                                }
+                            })
+                    }
 
                     return <div key={u.id}>
-
                 <span>
                     <div>
                        <NavLink to={'/profile/' + u.id}><img src={u.photos.small !== null ? u.photos.small : userPhoto}
-                                                            className={s.avatar}
-                                                            alt='userAvatar'/> </NavLink>
+                                                             className={s.avatar}
+                                                             alt='userAvatar'/> </NavLink>
                     </div>
                     <div>
                         {u.followed ? <button onClick={onUnfollowHandler}>Unfollow</button>

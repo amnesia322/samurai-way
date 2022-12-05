@@ -21,7 +21,7 @@ export class HeaderContainer extends React.Component<any, any> {
         })
             .then(res => {
                 if (res.data.resultCode === 0) {
-                    debugger
+
                     this.props.setUserDataAC(res.data.data)
                 }
             })
