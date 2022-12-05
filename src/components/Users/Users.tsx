@@ -3,8 +3,7 @@ import s from './users.module.css'
 import userPhoto from '../../assets/images/userAvatar.png'
 import {UserType} from "../../redux/reducers/usersReducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {settingsAPI} from "./UsersContainer";
+import {usersAPI} from "../../api/api";
 
 export type UsersPropsType = {
     users: Array<UserType>
@@ -14,6 +13,8 @@ export type UsersPropsType = {
     onPageChanged: (page: number) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
+    toggleIsFollowingProgress: (isFetching: boolean) => void
+    isFollowingInProgress: boolean
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -69,20 +70,22 @@ export const Users = (props: UsersPropsType) => {
 
             {props.users.map((u: UserType) => {
                     const onFollowHandler = () => {
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
-                            settingsAPI)
-                            .then(res => {
-                                if (res.data.resultCode === 0) {
+                        props.toggleIsFollowingProgress(true)
+                        usersAPI.follow(u.id)
+                            .then(data => {
+                                if (data.resultCode === 0) {
                                     props.follow(u.id)
+                                    props.toggleIsFollowingProgress(false)
                                 }
                             })
                     };
                     const onUnfollowHandler = () => {
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                            settingsAPI)
-                            .then(res => {
-                                if (res.data.resultCode === 0) {
+                        props.toggleIsFollowingProgress(true)
+                        usersAPI.unfollow(u.id)
+                            .then(data => {
+                                if (data.resultCode === 0) {
                                     props.unfollow(u.id)
+                                    props.toggleIsFollowingProgress(false)
                                 }
                             })
                     }
@@ -95,8 +98,9 @@ export const Users = (props: UsersPropsType) => {
                                                              alt='userAvatar'/> </NavLink>
                     </div>
                     <div>
-                        {u.followed ? <button onClick={onUnfollowHandler}>Unfollow</button>
-                            : <button onClick={onFollowHandler}>Follow</button>}
+                        {u.followed ?
+                            <button onClick={onUnfollowHandler} disabled={props.isFollowingInProgress}>Unfollow</button>
+                            : <button onClick={onFollowHandler} disabled={props.isFollowingInProgress}>Follow</button>}
                     </div>
                 </span>
                         <span>
