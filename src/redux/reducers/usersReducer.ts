@@ -17,15 +17,6 @@ type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 type toggleIsFollowingProgressACType = ReturnType<typeof toggleIsFollowingProgress>
 
 
-// export type UserType = {
-//     id: string,
-//     photoURL: string
-//     followed: boolean,
-//     fullName: string,
-//     status: string,
-//     location: {country: string, city: string}
-// }
-
 export type UserType = {
     "name": string,
     "id": number,

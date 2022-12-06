@@ -23,3 +23,10 @@ export const usersAPI = {
     }
 }
 
+export const authAPI = {
+    getUserData () {
+        return instance.get(`auth/me`)
+            .then(res => res.data)
+    }
+}
+
