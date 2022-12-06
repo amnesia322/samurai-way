@@ -3,7 +3,6 @@ import s from './users.module.css'
 import userPhoto from '../../assets/images/userAvatar.png'
 import {UserType} from "../../redux/reducers/usersReducer";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 export type UsersPropsType = {
     users: Array<UserType>
@@ -70,24 +69,10 @@ export const Users = (props: UsersPropsType) => {
 
             {props.users.map((u: UserType) => {
                     const onFollowHandler = () => {
-                        props.toggleIsFollowingProgress(true, u.id)
-                        usersAPI.follow(u.id)
-                            .then(data => {
-                                if (data.resultCode === 0) {
-                                    props.follow(u.id)
-                                    props.toggleIsFollowingProgress(false, u.id)
-                                }
-                            })
+                        props.follow(u.id)
                     };
                     const onUnfollowHandler = () => {
-                        props.toggleIsFollowingProgress(true, u.id)
-                        usersAPI.unfollow(u.id)
-                            .then(data => {
-                                if (data.resultCode === 0) {
-                                    props.unfollow(u.id)
-                                    props.toggleIsFollowingProgress(false, u.id)
-                                }
-                            })
+                        props.unfollow(u.id)
                     }
 
                     return <div key={u.id}>
