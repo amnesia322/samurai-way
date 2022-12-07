@@ -1,14 +1,8 @@
 import React from "react";
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {
-    addPostAC,
-    profilePageType,
-    setUserProfileAC,
-    updateNewPostTextAC
-} from "../../redux/reducers/profileReducer";
+import {addPostAC, getUserProfileTC, profilePageType, updateNewPostTextAC} from "../../redux/reducers/profileReducer";
 import {withRouter} from "react-router-dom";
 
 // type mapStateToPropsType = {
@@ -27,10 +21,7 @@ class ProfileContainer extends React.Component<any, profilePageType> {
         if (!userId) {
             userId = 26683;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(res => {
-                this.props.setUserProfileAC(res.data)
-            })
+        this.props.getUserProfileTC(userId)
 
 
     }
@@ -50,5 +41,5 @@ const WithURLDataContainerComponent = withRouter(ProfileContainer)
 
 export default connect(mapStateToProps, {
     addPostAC,
-    updateNewPostTextAC, setUserProfileAC
+    updateNewPostTextAC, getUserProfileTC
 })(WithURLDataContainerComponent)

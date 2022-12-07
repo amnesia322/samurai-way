@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {profileAPI} from "../../api/api";
 
 type ActionsType = addPostACType | updateNewPostTextACType | setUserProfileACType
 export type addPostACType = ReturnType<typeof addPostAC>
@@ -98,6 +100,13 @@ export const setUserProfileAC = (profile: UserProfileType) => {
         type: "SET-USER-PROFILE",
         profile: profile
     } as const
+}
+
+export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
+    profileAPI.getUserProfile(userId)
+        .then(res => {
+            dispatch(setUserProfileAC(res))
+        })
 }
 
 export default profileReducer;
