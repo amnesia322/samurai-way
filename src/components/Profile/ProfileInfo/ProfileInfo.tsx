@@ -1,9 +1,11 @@
 import React from "react";
 import s from "./ProfileInfo.module.css"
 import {UserProfileType} from "../../../redux/reducers/profileReducer";
+import ProfileStatus from "./ProfileStatus";
 
 export type ProfileInfoPropsType = {
-    profile: UserProfileType
+    profile: UserProfileType,
+    status: string | null
 }
 
 function ProfileInfo(props: ProfileInfoPropsType) {
@@ -18,10 +20,10 @@ function ProfileInfo(props: ProfileInfoPropsType) {
                 {props.profile.fullName}
                 <img src={props.profile.photos.small !== null ? props.profile.photos.small :
                     'https://i.pinimg.com/736x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg'}/>
-                ava + description
+                <ProfileStatus status={props.status}/>
             </div>
         </div>
     );
 }
 
-export default ProfileInfo
+export default ProfileInfo;
