@@ -2,7 +2,13 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getUserProfileTC, getUserStatusTC, profilePageType, UserProfileType} from "../../redux/reducers/profileReducer";
+import {
+    getUserProfileTC,
+    getUserStatusTC,
+    profilePageType,
+    updateStatusTC,
+    UserProfileType
+} from "../../redux/reducers/profileReducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
@@ -30,7 +36,8 @@ export class ProfileContainer extends React.Component<any, profilePageType> {
 
     render() {
 
-        return <Profile profile={this.props.profile} status={this.props.status}/>
+        return <Profile profile={this.props.profile} status={this.props.status}
+        updateStatus={this.props.updateStatusTC}/>
 
     };
 }
@@ -46,7 +53,8 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         getUserProfileTC,
-        getUserStatusTC
+        getUserStatusTC,
+        updateStatusTC
     }),
     withRouter,
 )(ProfileContainer)

@@ -8,12 +8,13 @@ import {UserProfileType} from "../../redux/reducers/profileReducer";
 export type ProfilePropsType = {
     profile: UserProfileType
     status: string | null
+    updateStatus: (status: string) => void
 }
 
 function Profile(props: ProfilePropsType) {
     return (
         <div className={s.content}>
-            <ProfileInfo profile={props.profile} status={props.status}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
         </div>
     );

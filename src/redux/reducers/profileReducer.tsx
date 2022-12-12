@@ -129,5 +129,14 @@ export const getUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
         })
 }
 
+export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(status)
+        .then(res => {
+            if(res.data.resultCode === 0) {
+                dispatch(setUserStatus(status))
+            }
+        })
+}
+
 export default profileReducer;
 
