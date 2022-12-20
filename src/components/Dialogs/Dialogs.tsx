@@ -1,8 +1,9 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogsPropsType} from "./DialogsContainer";
+import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -14,14 +15,9 @@ const Dialogs = (props: DialogsPropsType) => {
         message={m.message}
         id={m.id}/>)
 
-
-    const addMessage = () => {
-        props.addMessage()
+    const addNewMessage = (values: AddMessageFormType) => {
+        props.addMessage(values.newMessageBody)
     }
-    const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageText(e.currentTarget.value)
-    }
-
 
     //UI
     return (
@@ -31,14 +27,15 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElement}
-                <div>
-                    <textarea value={props.dialogsPage.newMessageText} onChange={onChangeMessage}></textarea>
-                    <button onClick={addMessage}>Send message</button>
-                </div>
+                <AddMessageFormRedux  onSubmit={addNewMessage}/>
             </div>
 
         </div>
     )
+}
+
+export type AddMessageFormType = {
+    newMessageBody: string
 }
 
 export default Dialogs;
