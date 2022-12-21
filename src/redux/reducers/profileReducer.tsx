@@ -2,10 +2,9 @@ import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileAPI} from "../../api/api";
 
-type ActionsType = addPostACType | updateNewPostTextACType
+type ActionsType = addPostACType
     | setUserProfileACType | setUserStatusACType
 export type addPostACType = ReturnType<typeof addPostAC>
-export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 export type setUserStatusACType = ReturnType<typeof setUserStatus>
 export type PostDataType = {
@@ -15,7 +14,6 @@ export type PostDataType = {
 }
 export type profilePageType = {
     postData: Array<PostDataType>
-    newPostText: string
     profile: UserProfileType
     status: string | null
 }
@@ -36,7 +34,7 @@ export type UserProfileType = {
     fullName: string,
     userId: number,
     photos: {
-        small: string | null ,
+        small: string | null,
         large: string | null
     }
 }
@@ -47,7 +45,6 @@ let initialState = {
         {id: v1(), message: 'It\'s my first post', likesCount: 23},
         {id: v1(), message: 'Nice to meet you!', likesCount: 48}
     ],
-    newPostText: '',
     profile: {
         aboutMe: null,
         contacts: {
@@ -76,10 +73,8 @@ let initialState = {
 const profileReducer = (state: profilePageType = initialState, action: ActionsType): profilePageType => {
     switch (action.type) {
         case 'ADD-POST':
-            const newPost = {id: v1(), message: state.newPostText, likesCount: 0}
-            return {...state, postData: [...state.postData, newPost], newPostText: ''};
-        case 'UPDATE-NEW-POST-TEXT':
-            return {...state, newPostText: action.value};
+            const newPost = {id: v1(), message: action.newPost, likesCount: 0}
+            return {...state, postData: [...state.postData, newPost]};
         case 'SET-USER-PROFILE':
             return {...state, profile: action.profile}
         case "SET-USER-STATUS":
@@ -89,17 +84,12 @@ const profileReducer = (state: profilePageType = initialState, action: ActionsTy
     }
 }
 
-export const addPostAC = () => {
+export const addPostAC = (newPost: string) => {
     return {
-        type: "ADD-POST",
+        type: "ADD-POST", newPost
     } as const
 }
-export const updateNewPostTextAC = (newPost: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        value: newPost
-    } as const
-}
+
 
 export const setUserProfileAC = (profile: UserProfileType) => {
     return {
@@ -132,7 +122,7 @@ export const getUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
 export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(status)
         .then(res => {
-            if(res.data.resultCode === 0) {
+            if (res.data.resultCode === 0) {
                 dispatch(setUserStatus(status))
             }
         })

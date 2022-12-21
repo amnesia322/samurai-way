@@ -1,6 +1,5 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {AddMessageFormType} from "../Dialogs";
 
 const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) => {
     return (
@@ -19,5 +18,8 @@ export const AddMessageFormRedux = reduxForm<AddMessageFormType>({
     form: 'dialogAddMessageForm'
 }) (AddMessageForm)
 
+export type AddMessageFormType = {
+    newMessageBody: string
+}
 
 export default AddMessageForm;

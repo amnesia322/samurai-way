@@ -1,36 +1,23 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostPropsType} from "./MyPostsContainer";
-
-
-/*export type MyPostsPropsType = {
-    postData: Array<PostDataType>
-    newPostText: string
-    dispatch: (action: dispatchActionType) => void
-    addPost: () => void
-    updateNewPostText: (text: string) => void
-}*/
-
+import {AddPostFormRedux, AddPostFormType} from "./AddPostForm/AddPostForm";
 
 
 function MyPosts(props: MyPostPropsType) {
     //BLL
     const postsElements = props.postData.map(p => <Post message={p.message} likes={p.likesCount} key={p.id}/>)
-    const addPost = () => {
-         props.addPost()
-         props.updateNewPostText('')
-    }
-    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+
+    const addNewPost = (values: AddPostFormType) => {
+        props.addPost(values.newPostText)
     }
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
-                <textarea onChange={onPostChange} value={props.newPostText} className={s.textArea}/>
-                <button onClick={addPost} className={s.buttonAdd}>Add Post</button>
+                <AddPostFormRedux onSubmit={addNewPost}/>
             </div>
             <div className={s.posts}>
                 {postsElements}
