@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {authAPI} from "../../api/api";
 import {LoginFormDataType} from "../../components/Login/LoginPage";
 import {AppThunkDispatch} from "../redux-store";
+import {stopSubmit} from "redux-form";
 
 type ActionsTypes = SetUserDataAT
 
@@ -46,9 +47,9 @@ export const setUserDataAC = (id: number | null, email: string | null,
 
 export const getUserDataTC = () => (dispatch: Dispatch) => {
     authAPI.getUserData()
-        .then(data => {
-            const {id, email, login } = data.data
-            if (data.resultCode === 0) {
+        .then(res => {
+            const {id, email, login } = res.data.data
+            if (res.data.resultCode === 0) {
                 dispatch(setUserDataAC(id, email, login, true ))
             }
         })
@@ -57,8 +58,12 @@ export const getUserDataTC = () => (dispatch: Dispatch) => {
 export const login = (data: LoginFormDataType) => (dispatch: AppThunkDispatch) => {
     authAPI.login(data)
         .then(res => {
-            if (res.resultCode === 0) {
+            console.log(res)
+            if (res.data.resultCode === 0) {
                 dispatch(getUserDataTC())
+            } else {
+                const message = res.messages.length > 0 ? res.messages[0] : 'Some error';
+                dispatch(stopSubmit('login', {_error: message}))
             }
         })
 }

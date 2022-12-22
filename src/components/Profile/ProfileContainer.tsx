@@ -9,26 +9,35 @@ import {
     updateStatusTC,
     UserProfileType
 } from "../../redux/reducers/profileReducer";
-import {withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
 type mapStateToPropsType = {
     profile: UserProfileType,
     status: string | null
+    userId: number | null
 }
-// type mapDispatchToPropsType = {
-//     addPostAC: ()=> void,
-//     updateNewPostTextAC: (newPost: string) => void,
-//     setUserProfileAC: (profile: UserProfileType) => void
-// }
-// type ProfileContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-export class ProfileContainer extends React.Component<any, profilePageType> {
+type paramsType = {
+    userId: string | undefined
+}
+
+type mapDispatchToPropsType = {
+    updateStatusTC: (status: string) => void,
+    getUserStatusTC: (userId: number) => void,
+    getUserProfileTC: (userId: number) => void
+}
+type ProfileContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
+
+export class ProfileContainer extends React.Component<ProfileContainerPropsType & RouteComponentProps<paramsType>, profilePageType> {
     componentDidMount() {
-        let userId = this.props.match.params.userId;
+        let userId = Number(this.props.match.params.userId);
+        console.log(this.props)
+
         if (!userId) {
-            userId = 26683;
+            userId = 26288;
         }
+        userId &&
         this.props.getUserProfileTC(userId)
         this.props.getUserStatusTC(userId)
 
@@ -37,16 +46,16 @@ export class ProfileContainer extends React.Component<any, profilePageType> {
     render() {
 
         return <Profile profile={this.props.profile} status={this.props.status}
-        updateStatus={this.props.updateStatusTC}/>
+                        updateStatus={this.props.updateStatusTC}/>
 
     };
 }
 
 
-
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    userId: state.auth.id
 })
 
 

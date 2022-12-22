@@ -5,6 +5,7 @@ import {minLengthCreator, requiredField} from "../../utils/validators/validator"
 import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
 import {login} from "../../redux/reducers/authReducer";
 import {Redirect} from "react-router-dom";
+import s from './LoginPage.module.css'
 
 const minLength5 = minLengthCreator(5)
 
@@ -20,8 +21,10 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
                        type={'password'} validate={[requiredField, minLength5]}/>
             </div>
             <div>
-                <Field type="checkbox" name={'rememberMe'} component={Input}/> remember me
+                Remember Me
+                <Field type="checkbox" name={'rememberMe'} component={Input} />
             </div>
+           {props.error && <span className={s.error}>{props.error} </span>}
             <div>
                 <button>Login</button>
             </div>
