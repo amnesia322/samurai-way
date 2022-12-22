@@ -1,18 +1,26 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {useDispatch} from "react-redux";
+import {Input} from "../common/FormsControls/FormsControls";
+import {minLengthCreator, requiredField} from "../../utils/validators/validator";
+import {useAppDispatch, useAppSelector} from "../../redux/redux-store";
+import {login} from "../../redux/reducers/authReducer";
+import {Redirect} from "react-router-dom";
+
+const minLength5 = minLengthCreator(5)
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Email'} name={'email'} component={'input'}/>
+                <Field placeholder={'Email'} name={'email'} component={Input}
+                       validate={[requiredField]}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={'input'}/>
+                <Field placeholder={'Password'} name={'password'} component={Input}
+                       type={'password'} validate={[requiredField, minLength5]}/>
             </div>
             <div>
-                <Field type="checkbox" name={'rememberMe'} component={'input'}/> remember me
+                <Field type="checkbox" name={'rememberMe'} component={Input}/> remember me
             </div>
             <div>
                 <button>Login</button>
@@ -24,11 +32,13 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<LoginFormDataType>({form: 'login'})(LoginForm)
 
 export const Login = () => {
-    const dispatch = useDispatch();
-
+    const dispatch = useAppDispatch();
+    const isAuth = useAppSelector(state => state.auth.isAuth)
     const onSubmit = (formData: LoginFormDataType) => {
-        //dispatch(getUserLoginTC(formData))
-        console.log(formData)
+        dispatch(login(formData))
+    }
+    if (isAuth) {
+        return <Redirect to={'/profile'}/>
     }
 
     return <div>
@@ -37,12 +47,11 @@ export const Login = () => {
     </div>
 }
 export type LoginFormDataType = {
-    login: string
-    password: string
-    rememberMe?: boolean
-    captcha?: boolean
+    login: string | null
+    password: string | null
+    rememberMe?: boolean | null
+    captcha?: boolean | null
 }
-
 
 
 export default LoginForm;

@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogsPropsType} from "./DialogsContainer";
-import {AddMessageFormRedux, AddMessageFormType} from "./AddMessageForm/AddMessageForm";
+import AddMessageForm, {AddMessageFormType} from "./AddMessageForm/AddMessageForm";
 
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -27,7 +27,7 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElement}
-                <AddMessageFormRedux onSubmit={addNewMessage}/>
+                <AddMessageForm onSubmit={addNewMessage}/>
             </div>
 
         </div>

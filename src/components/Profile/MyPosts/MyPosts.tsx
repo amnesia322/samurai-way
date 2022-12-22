@@ -2,7 +2,7 @@ import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostPropsType} from "./MyPostsContainer";
-import {AddPostFormRedux, AddPostFormType} from "./AddPostForm/AddPostForm";
+import AddPostForm, {AddPostFormType} from "./AddPostForm/AddPostForm";
 
 
 function MyPosts(props: MyPostPropsType) {
@@ -17,7 +17,7 @@ function MyPosts(props: MyPostPropsType) {
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
-                <AddPostFormRedux onSubmit={addNewPost}/>
+                <AddPostForm onSubmit={addNewPost}/>
             </div>
             <div className={s.posts}>
                 {postsElements}

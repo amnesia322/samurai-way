@@ -11,7 +11,7 @@ export function Header(props: HeaderPropsType) {
             <img src='https://upload.wikimedia.org/wikipedia/commons/d/db/Zeronet_logo.png' alt='header-logo'/>
             <h1>Society</h1>
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login
+                {props.isAuth ? (<div>{props.login}<button onClick={props.logout}>Log Out</button></div>)
                 : <NavLink to={'/login'}>Login</NavLink>}
 
             </div>

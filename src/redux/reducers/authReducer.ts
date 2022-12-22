@@ -1,11 +1,11 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../../api/api";
 import {LoginFormDataType} from "../../components/Login/LoginPage";
+import {AppThunkDispatch} from "../redux-store";
 
-type ActionsTypes = SetUserDataAT | SetUserLoginAT
+type ActionsTypes = SetUserDataAT
 
 type SetUserDataAT = ReturnType<typeof setUserDataAC>
-type SetUserLoginAT = ReturnType<typeof setUserLoginAC>
 
 export type HeaderType = {
     id: number | null
@@ -18,7 +18,7 @@ let initialState: HeaderType = {
     id: null,
     email: null,
     login: null,
-    isAuth: true
+    isAuth: false
 }
 
 const authReducer = (state: HeaderType = initialState, action: ActionsTypes): HeaderType => {
@@ -26,49 +26,51 @@ const authReducer = (state: HeaderType = initialState, action: ActionsTypes): He
         case 'SET-USER-DATA':
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload,
+                isAuth: action.isAuth
             }
-        case "SET-USER-LOGIN":
-            return {...state, isAuth: action.isAuth}
         default:
             return state
     }
 }
 
 
-export const setUserDataAC = (data: HeaderType) => {
+export const setUserDataAC = (id: number | null, email: string | null,
+                              login: string | null,
+                              isAuth: boolean) => {
     return {
-        type: 'SET-USER-DATA', data
+        type: 'SET-USER-DATA', payload: {id, email, login}, isAuth
     } as const
 }
-
-export const setUserLoginAC = (isAuth: boolean) => {
-    return {
-        type: 'SET-USER-LOGIN', isAuth
-    } as const
-}
-
 
 
 export const getUserDataTC = () => (dispatch: Dispatch) => {
     authAPI.getUserData()
         .then(data => {
+            const {id, email, login } = data.data
             if (data.resultCode === 0) {
-                dispatch(setUserDataAC(data.data))
+                dispatch(setUserDataAC(id, email, login, true ))
             }
         })
 }
 
-export const getUserLoginTC = (data: LoginFormDataType) => (dispatch: Dispatch) => {
+export const login = (data: LoginFormDataType) => (dispatch: AppThunkDispatch) => {
     authAPI.login(data)
         .then(res => {
             if (res.resultCode === 0) {
-                dispatch(setUserLoginAC(true))
+                dispatch(getUserDataTC())
             }
         })
 }
 
+export const logout = () => (dispatch: AppThunkDispatch) => {
+    authAPI.logout()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setUserDataAC(null, null, null, false ))
+            }
+        })
+}
 
 
 export default authReducer;
