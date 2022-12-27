@@ -18,10 +18,16 @@ function ProfileInfo(props: ProfileInfoPropsType) {
                     alt=""/>
             </div>
             <div className={s.descriptionBlock}>
-                {props.profile.fullName}
+
+
                 <img src={props.profile.photos.small !== null ? props.profile.photos.small :
-                    'https://i.pinimg.com/736x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg'}/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    'https://i.pinimg.com/736x/2e/2e/21/2e2e2125ee53807c2d77b34773f84b5c.jpg'}
+                className={s.avatar}/>
+                <div>
+                    <span>{props.profile.fullName}</span>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                </div>
+
             </div>
         </div>
     );
