@@ -59,8 +59,8 @@ let initialState = {
         },
         lookingForAJob: false,
         lookingForAJobDescription: null,
-        fullName: "Alex-cyber1",
-        userId: 26685,
+        fullName: null,
+        userId: null,
         photos: {
             small: null,
             large: null
@@ -115,7 +115,7 @@ export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
 export const getUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
     profileAPI.getUserStatus(userId)
         .then(res => {
-            dispatch(setUserStatus(res))
+               res && dispatch(setUserStatus(res))
         })
 }
 

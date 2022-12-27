@@ -27,8 +27,7 @@ const authReducer = (state: HeaderType = initialState, action: ActionsTypes): He
         case 'SET-USER-DATA':
             return {
                 ...state,
-                ...action.payload,
-                isAuth: action.isAuth
+                ...action.payload
             }
         default:
             return state
@@ -40,14 +39,15 @@ export const setUserDataAC = (id: number | null, email: string | null,
                               login: string | null,
                               isAuth: boolean) => {
     return {
-        type: 'SET-USER-DATA', payload: {id, email, login}, isAuth
+        type: 'SET-USER-DATA', payload: {id, email, login, isAuth}
     } as const
 }
 
 
 export const getUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.getUserData()
+    return authAPI.getUserData()
         .then(res => {
+            console.log(res)
             const {id, email, login } = res.data.data
             if (res.data.resultCode === 0) {
                 dispatch(setUserDataAC(id, email, login, true ))
@@ -58,7 +58,6 @@ export const getUserDataTC = () => (dispatch: Dispatch) => {
 export const login = (data: LoginFormDataType) => (dispatch: AppThunkDispatch) => {
     authAPI.login(data)
         .then(res => {
-            console.log(res)
             if (res.data.resultCode === 0) {
                 dispatch(getUserDataTC())
             } else {

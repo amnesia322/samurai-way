@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
@@ -7,13 +7,23 @@ import {Login} from "./components/Login/LoginPage";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import {useAppDispatch, useAppSelector} from "./redux/redux-store";
+import {initialize} from "./redux/reducers/appReducer";
+import Preloader from "./components/common/Preloader/Preloader";
 
 
 function App() {
+    const dispatch = useAppDispatch()
+    const isInitialized = useAppSelector(state => state.app.initialized)
 
-    return (
+    useEffect(() => {
+        dispatch(initialize())
+    }, [])
 
-        <div className='app-wrapper'>
+    if (!isInitialized) {
+        return <Preloader/>
+    } else {
+        return <div className='app-wrapper'>
             <HeaderContainer/>
             <Navbar/>
             <div className='app-wrapper-content'>
@@ -27,8 +37,7 @@ function App() {
                        render={() => <Login/>}/>
             </div>
         </div>
-
-    );
+    }
 }
 
 

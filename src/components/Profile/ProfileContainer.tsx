@@ -24,20 +24,17 @@ type paramsType = {
 
 type mapDispatchToPropsType = {
     updateStatusTC: (status: string) => void,
-    getUserStatusTC: (userId: number) => void,
-    getUserProfileTC: (userId: number) => void
+    getUserStatusTC: (userId: number | null) => void,
+    getUserProfileTC: (userId: number | null) => void
 }
 type ProfileContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export class ProfileContainer extends React.Component<ProfileContainerPropsType & RouteComponentProps<paramsType>, profilePageType> {
     componentDidMount() {
-        let userId = Number(this.props.match.params.userId);
-        console.log(this.props)
-
+        let userId: number | null = Number(this.props.match.params.userId);
         if (!userId) {
-            userId = 26288;
+            userId = this.props.userId
         }
-        userId &&
         this.props.getUserProfileTC(userId)
         this.props.getUserStatusTC(userId)
 
